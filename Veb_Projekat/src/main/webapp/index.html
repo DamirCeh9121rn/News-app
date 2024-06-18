@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Veb_Projekat</h1>
+</body>
+<form id="putForm">
+
+    <button type="submit">Pošalji</button>
+</form>
+
+<script>
+    document.getElementById('putForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const data = new FormData(e.target);
+        const value = data.get('data');
+
+        fetch('http://localhost:8080/Veb_Projekat_war_exploded/api/users/login', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "email":"pperovic@news.com",
+                "password":"123"
+            })
+        }).then(response => response.json()).then(data => {
+            console.log(data);
+        });
+    });
+</script>
+
+</html>
